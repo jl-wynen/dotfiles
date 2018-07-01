@@ -37,3 +37,7 @@ profiles:
     - f_i3status_config
     - f_compton.conf
     - f_termite_config
+  jureca:
+    dotfiles:
+    - f_bashrc
+    - f_gitconfig
