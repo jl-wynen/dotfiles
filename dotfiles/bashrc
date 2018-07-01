@@ -1,0 +1,490 @@
+#
+# Configuration script for bash
+# author: Jan-Lukas Wynen
+#
+
+# there seems to be a problem with \" -> konsole crashes on startup
+# start shell with
+#  /bin/bash -c "mkdir /home/jl/log 2> /dev/null; script -c /bin/bash \"/home/jl/log/log_`date +'%Y-%m-%dT%H:%M:%S%:z'`"\"
+# in order to log in-/output to file
+
+[[ $- != *i* ]] && return
+
+# detect whether session is remote or local
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    SESSION_TYPE="remote/ssh"
+else
+    case $(ps -o comm= -p $PPID) in
+        sshd|*/sshd) SESSION_TYPE="remote/ssh";;
+    esac
+fi
+if [ -z "$SESSION_TYPE" ]; then
+    SESSION_TYPE="local"
+fi
+
+# add locations to PATH
+export PATH=.:~/bin:~/.local/bin:$PATH
+
+# tell pkg-config about some packages
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig
+
+# need to find CUDA
+export CUDADIR=/opt/cuda
+
+# path to pardiso.lic
+export PARDISO_LIC_PATH=~/.pardiso
+
+# we want all the colours!
+export TERM=xterm-256color
+
+# configure git
+if [ -f ~/bin/git-completion.bash ]; then
+    source ~/bin/git-completion.bash
+fi
+if [ -f ~/bin/git-prompt.sh ]; then
+    source ~/bin/git-prompt.sh
+    export GIT_PS1_SHOWDIRTYSTATE=1
+    export GIT_PS1_SHOWUPSTREAM="auto"
+    HAVE_GIT_PROMPT=1
+else
+    HAVE_GIT_PROMPT=0
+fi
+
+# do not show pesky duplicates in history
+export HISTCONTROL=ignoredups
+
+#######################################################
+#                     Aliases                         #
+# file listings
+alias ls='\ls -hF --color=auto --time-style=long-iso'
+alias l='ls -l'
+alias ll='ls -l'
+alias la='ls -A'
+alias lax='ls -A -XB'
+alias lla='ls -lA'
+alias lx='ls -XB'
+alias llx='ls -l -XB'
+alias llax='ls -lA -XB'
+
+# safety prompts
+alias cp='cp -i'
+alias mv='mv -i'
+
+# manipulate directory stack
+alias +='pushd .'  # add current dir to stack
+alias ´='pushd'    # exchange top dirs on stack and move to other
+alias -- -='popd'  # remove top dir and cd into it
+
+# miscellanious
+alias mkdir='mkdir -p'
+alias ..='cd ..'
+alias ...='cd ..; cd ..'
+alias grep='grep --color'
+alias callgrind='valgrind --tool=callgrind'
+alias pudb='pudb3'
+alias open="xdg-open 2>/dev/null"
+
+#######################################################
+#                  Setup Editors                      #
+# make emacs the default
+export EDITOR="emacsclient -t -a'vim'"
+export ALTERNATE_EDITOR="vim"
+export VISUAL="emacsclient -c -a'emacs'"
+export LESSEDIT="emacsclient -t -a'vim' ?lm+%lm. %f"
+alias edit="emacsclient -t -a'vim'"
+alias kill_emacs_f="emacsclient -e '(kill-emacs)' -a ''"
+alias kill_emacs="emacsclient -e '(client-save-kill-emacs)' -a ''"
+
+# enable syntax highlighting for less (requires source-highlight)
+if [ -e /usr/bin/src-hilite-lesspipe.sh ]; then
+    export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+    export LESS=' -R '
+fi
+
+#######################################################
+#                    Colour Codes                     #
+# Reset
+COLOUR_OFF="\[\033[0m\]"
+
+# Regular Colors
+BLACK="\[\033[0;30m\]"
+RED="\[\033[0;31m\]"
+GREEN="\[\033[0;32m\]"
+YELLOW="\[\033[0;33m\]"
+BLUE="\[\033[0;34m\]"
+PURPLE="\[\033[0;35m\]"
+CYAN="\[\033[0;36m\]"
+WHITE="\[\033[0;37m\]"
+
+# Bold
+BBLACK="\[\033[1;30m\]"
+BRED="\[\033[1;31m\]"
+BGREEN="\[\033[1;32m\]"
+BYELLOW="\[\033[1;33m\]"
+BBLUE="\[\033[1;34m\]"
+BPURPLE="\[\033[1;35m\]"
+BCYAN="\[\033[1;36m\]"
+BWHITE="\[\033[1;37m\]"
+
+# Underline
+UBLACK="\[\033[4;30m\]"
+URED="\[\033[4;31m\]"
+UGREEN="\[\033[4;32m\]"
+UYELLOW="\[\033[4;33m\]"
+UBLUE="\[\033[4;34m\]"
+UPURPLE="\[\033[4;35m\]"
+UCYAN="\[\033[4;36m\]"
+UWHITE="\[\033[4;37m\]"
+
+# Background
+ON_BLACK="\[\033[40m\]"
+ON_RED="\[\033[41m\]"
+ON_GREEN="\[\033[42m\]"
+ON_YELLOW="\[\033[43m\]"
+ON_BLUE="\[\033[44m\]"
+ON_PURPLE="\[\033[45m\]"
+ON_CYAN="\[\033[46m\]"
+ON_WHITE="\[\033[47m\]"
+
+# High Intensty
+IBLACK="\[\033[0;90m\]"
+IRED="\[\033[0;91m\]"
+IGREEN="\[\033[0;92m\]"
+IYELLOW="\[\033[0;93m\]"
+IBLUE="\[\033[0;94m\]"
+IPURPLE="\[\033[0;95m\]"
+ICYAN="\[\033[0;96m\]"
+IWHITE="\[\033[0;97m\]"
+
+# Bold High Intensty
+BIBLACK="\[\033[1;90m\]"
+BIRED="\[\033[1;91m\]"
+BIGREEN="\[\033[1;92m\]"
+BIYELLOW="\[\033[1;93m\]"
+BIBLUE="\[\033[1;94m\]"
+BIPURPLE="\[\033[1;95m\]"
+BICYAN="\[\033[1;96m\]"
+BIWHITE="\[\033[1;97m\]"
+
+# High Intensty backgrounds
+ON_IBLACK="\[\033[0;100m\]"
+ON_IRED="\[\033[0;101m\]"
+ON_IGREEN="\[\033[0;102m\]"
+ON_IYELLOW="\[\033[0;103m\]"
+ON_IBLUE="\[\033[0;104m\]"
+ON_IPURPLE="\[\033[10;95m\]"
+ON_ICYAN="\[\033[0;106m\]"
+ON_IWHITE="\[\033[0;107m\]"
+
+# Print a table of the standard colours.
+colours() {
+    local fgc bgc vals seq0
+
+    printf "Colour sequences are %s\n" '\e[${value};...;${value}m'
+    printf "Values 30..37 are \e[33mforeground colours\e[m\n"
+    printf "Values 40..47 are \e[43mbackground colours\e[m\n"
+
+    # foreground colours
+    for fgc in {30..37}; do
+        # background colours
+        for bgc in {40..47}; do
+            fgc=${fgc#37} # white
+            bgc=${bgc#40} # black
+
+            vals="${fgc:+$fgc;}${bgc}"
+            vals=${vals%%;}
+
+            seq0="${vals:+\e[${vals}m}"
+            printf "  %-9s" "${seq0:-(default)}"
+            printf " ${seq0}TEXT\e[m"
+            printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
+        done
+        echo; echo
+    done
+}
+
+# Get the name of the currently active virtual environment.
+# Outputs nothing if not in a virtual environment.
+function venv-name() {
+    # stop if no venv name set
+    [ -z "$VIRTUAL_ENV" ] && return 0
+
+    echo $VIRTUAL_ENV | sed 's:.*/\([^/]\+\)-[^-]\+:\1:'
+}
+
+# function venv-name() {
+#     # stop if no venv name set
+#     [ -z "$VIRTUAL_ENV" ] && return 0
+
+#     # split string at / to get rid of path
+#     local IFS="/"
+#     venv=($VIRTUAL_ENV)
+
+#     # split last element (virtualenv name) at -
+#     # to get rid of hash
+#     local IFS="-"
+#     venv=(${venv[-1]})
+
+#     # remove hash
+#     unset 'venv[-1]'
+
+#     # join rest by dashes again and output
+#     echo "${venv[*]}"
+
+#     # get rid of the internal field separator
+#     unset IFS
+# }
+
+
+#######################################################
+#                 Configure Prompt                    #
+# adjust prompt to whether user is root or not
+export PROMPT_COMMAND='EXIT_CODE="$?";
+  if [[ $EUID -ne 0 ]]; then
+    __prompt_command $EXIT_CODE;
+  else
+    PS1="\[\033[0;91m\]$EXIT_CODE \[\033[0;97m\]\w \[\033[0;91m\](\A) \[\e[41;37;1m\]#\[\033[0m\] ";
+  fi'
+
+
+# Show battery status if discharging and below 25%.
+# Change ADP1 and BAT0 if needed.
+function _prompt_battery() {
+    # start with check if adapter and battery name are correct
+    if [ -e /sys/class/power_supply/AC/online ] && [ -e /sys/class/power_supply/BAT0/uevent ]; then
+        # check whether power adapter is plugged in
+        if [ $(cat /sys/class/power_supply/AC/online) -eq 0 ]; then
+            local POWER_SUPPLY=$(cat /sys/class/power_supply/BAT0/uevent | grep POWER_SUPPLY_CAPACITY= | cut -d'=' -f 2)
+            if [ $POWER_SUPPLY -lt 25 ]; then
+                echo $IYELLOW"<⚡"$POWER_SUPPLY"%>"$COLOUR_OFF" "
+            fi
+        fi
+    fi
+}
+
+# Indicate subshells through wedges.
+# TODO Is it correct when using background jobs?
+function _prompt_subshells() {
+    # total number of instances of bash running in this process
+    local nshells=$(ps | grep -o -c 'bash')
+    # subtract subshell from command above, one for outter shell,
+    # and one for shell this function is called in
+    local nshells=$((nshells - 3))
+    if (( $nshells > 0 )); then
+        local res=$YELLOW
+        for (( c=0; c<$nshells; c++ ))
+        do
+            res+="»"
+        done
+    fi
+    echo $res
+}
+
+# Show git status
+function _prompt_git_status() {
+    if [ $HAVE_GIT_PROMPT ]; then
+        if [[ $(command -v git) ]]; then
+            # test whether dir is under vc
+            git branch &>/dev/null
+            if [ $? -eq 0 ]; then
+                # check status and remove warning if in .git dir
+                git status 2>&1 | grep -v "This operation must be run in a work tree" \
+                    | sed '/^$/d' | grep "nothing to commit" > /dev/null 2>&1
+                if [ $? -eq 0 ]; then
+                    # clean repo
+                    echo $GREEN$(__git_ps1 "[%s]")$COLOUR_OFF" "
+                else
+                    # unclean
+                    echo $CYAN$(__git_ps1 "{%s}")$COLOUR_OFF" "
+                fi
+            fi
+        fi
+    fi
+}
+
+# Show number of background and stopped jobs.
+function _prompt_job_info() {
+    local bgjbs=$(jobs -r | wc -l | tr -d ' ')
+    local stjbs=$(jobs -s | wc -l | tr -d ' ')
+    if [ $bgjbs -gt 0 ]; then
+        local res=$YELLOW"(bg:$bgjbs"
+        if [ $stjbs -gt 0 ]; then
+            res+=", stp:$stjbs"
+        fi
+        echo $res")"$COLOUR_OFF" "
+    elif [ $stjbs -gt 0 ]; then
+        echo $YELLOW"(stp:$stjbs)"$COLOUR_OFF" "
+    fi
+}
+
+# Show working directory, abbreviate if too long.
+function _prompt_working_dir() {
+    local wd=$(pwd)
+    echo $(echo ${wd/#$HOME/\~} | awk 'BEGIN {FS="/"};\
+ {output="";}\
+ {f1=""; f2=""; f3="";}\
+ {ellipsis="\xE2\x80\xA6";}\
+ {filler="";}\
+ {nmax=10;}\
+ {if (NF > 3)\
+  {f1=$1; f2=$(NF-1); f3=$(NF); filler=ellipsis"/"}\
+ else\
+  {f1=$1; f2=$2; f3=$3}};\
+ {if (length(f1) > nmax) {f1 = substr(f1,0,nmax)""ellipsis}};\
+ {if (length(f2) > nmax) {f2 = substr(f2,0,nmax)""ellipsis}};\
+ {if (length(f3) > nmax) {f3 = substr(f3,0,nmax)""ellipsis}};\
+ {if (length(f2) > 0) {f1 = f1"/";\
+   if (length(f3) > 0) {f2 = f2"/"; f3 = "\\[\\033[0;97m\\]"f3}\
+   else {f2 = "\\[\\033[0;97m\\]"f2}}\
+ else {if (length(f1) == 0) {f1 = "/"};\
+   f1 = "\\[\\033[0;97m\\]"f1}\
+ };\
+ {output = f1""filler""f2""f3;}\
+ {print output}')$COLOUR_OFF" "
+}
+
+# Indicate Python virtual environment
+function _prompt_python_venv() {
+    if [ "$PIPENV_ACTIVE" == "1" ]; then
+        echo $IGREEN" "$GREEN$(venv-name)$COLOUR_OFF" "
+    fi
+}
+
+function __prompt_command() {
+    local EXIT_CODE="$1"
+    PS1=""
+
+    # show the time on the right hand side
+    # use \[ and \] to hide length of string from bash to get proper line break
+    # need to include explicit colour strings since otherwise masking
+    # with \[ and \] would not work properly
+    # DATESTR=$(date +'%Y-%m-%d')
+    # TIMESTR=$(date +'%H:%M:%S')
+    # PS1+="\[\033["$(($(tput cols) - ${#DATESTR} - ${#TIMESTR} - 3))"C\
+    # [\033[0;91m"$DATESTR"\033[0m|\033[0;91m"$TIMESTR"\033[0m]\r\]"
+    # PS1+="\[\033["$(($(tput cols) - ${#TIMESTR} - 2))"C\
+    # [\033[0;91m"$TIMESTR"\033[0m]\r\]"
+
+    if [ "$SESSION_TYPE" = "remote/ssh" ]; then
+        # show host name for remote sessions
+        PS1+=$IBLUE"\h: "
+    else
+        # and battery status for local sessions
+        PS1+=$(_prompt_battery)
+    fi
+
+    # PS1+=$(_prompt_subshells)
+    
+    # show exit code of last program if non-zero
+    if [ $EXIT_CODE -ne 0 ]; then
+        PS1+=$IRED$EXIT_CODE$COLOUR_OFF" "
+    fi
+
+    PS1+=$(_prompt_git_status)$(_prompt_job_info)$(_prompt_python_venv)$(_prompt_working_dir)
+
+    # dollar
+    if [ "$SESSION_TYPE" = "remote/ssh" ]; then
+        PS1+=$IBLUE
+    else
+        PS1+=$RED
+    fi
+    PS1+="\$"$COLOUR_OFF" "
+}
+
+#######################################################
+#            Function to get Power Level              #
+# TODO use upower instead
+function power() {
+    if [ ! -e /sys/class/power_supply/AC/online ]; then
+        echo "File for power adaptor not found."
+        return 1
+    fi
+    if [ ! -e /sys/class/power_supply/BAT0/uevent ]; then
+        echo "File for battery not found."
+        return 1
+    fi
+        
+    # can't use pre defined colour because \[ and \] are displayed by echo
+    local POWER_SUPPLY=$(cat /sys/class/power_supply/BAT0/uevent | grep POWER_SUPPLY_CAPACITY= | cut -d'=' -f 2)
+    if [ $(cat /sys/class/power_supply/AC/online) -eq 1 ]; then
+        if [ $POWER_SUPPLY -eq 100 ]; then
+            echo -e "\033[0;92mBattery fully charged.\033[0m"
+        else
+            echo -e "\033[0;32mBattery at "$POWER_SUPPLY"% and charging.\033[0m"
+        fi
+    elif [ $POWER_SUPPLY -lt 25 ]; then
+        echo -e "\033[0;31mBattery at "$POWER_SUPPLY"% and discharging.\033[0m"
+    else
+        echo -e "\033[0;93mBattery at "$POWER_SUPPLY"% and discharging.\033[0m"
+    fi
+}
+
+#######################################################
+#               Suppress Warnings in output           #
+# generates a function named $1 which:
+# - executes $(which $1) [with args]
+# - suppresses output lines which match $2
+# e.g. adding: _supress echo "hello\|world"
+# will generate this function:
+# echo() { $(which echo) "$@" 2>&1 | grep -v "hello\|world" | sed '/^$/d'; }
+# and from now on, using echo will work normally except that lines with
+# hello or world will not show at the output
+# to see the generated functions, replace eval with echo below
+_suppress() {
+    eval "$1() { \$(which $1) \"\$@\" 2>&1 | \$(which grep) -v \"$2\" | sed '/^$/d'; }"
+}
+
+# _suppress firefox "g_slice_set_config"
+# _suppress okular "KMimeTypeRepository\|XRandR"
+
+
+#######################################################
+#               Describe error code                   #
+# restricted to bash codes
+function wtf() {
+    EXIT_CODE=$?
+    if [[ $# -eq "1" ]]; then
+        EXIT_CODE=$1
+    fi
+
+    # deal with signals separately
+    if (( 129 <= $EXIT_CODE && $EXIT_CODE <= 192 )); then
+        SIGNAL=$(($EXIT_CODE-128));
+        SIGNAME=$(kill -l $SIGNAL);
+        if (( ${#SIGNAME} == 0 )); then
+            printf "Code %d: Recieved signal %d. This signal is not implemented!\n" $EXIT_CODE $SIGNAL;
+        else
+            printf "Code %d: Recieved signal %d, SIG%s\n" $EXIT_CODE $SIGNAL $SIGNAME;
+        fi
+        return 0
+    fi
+    
+    case $EXIT_CODE in
+        0)
+            printf "Code %d: No error\n" $EXIT_CODE;;
+        1)
+            printf "Code %d: Miscellanious error\n" $EXIT_CODE;;
+        2)
+            printf "Code %d: Misuse of shell buitlins\n" $EXIT_CODE;;
+        126)
+            printf "Code %d: Command cannot be executed\n" $EXIT_CODE;;
+        127)
+            printf "Code %d: Command not found\n" $EXIT_CODE;;
+        128)
+            printf "Code %d: Invalid argument to 'exit'\n" $EXIT_CODE;;
+        255)
+            printf "Code %d: Exit code out of range\n" $EXIT_CODE;;
+        *)
+            printf "Code %d: No description of code found\n" $EXIT_CODE;;
+    esac
+}
+
+#######################################################
+#             Copy file path to 'clipboard'           #
+function copf() {
+    _CLIPBOARD=$(realpath -z $1)
+    export _CLIPBOARD
+}
+function pasf() {
+    printf "%s" $_CLIPBOARD
+}
