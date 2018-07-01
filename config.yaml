@@ -21,6 +21,9 @@ dotfiles:
   f_i3status_config:
     dst: ~/.config/i3status/config
     src: config/i3status/config
+  f_lock_screen.sh:
+    dst: ~/bin/lock_screen.sh
+    src: bin/lock_screen.sh
   f_termite_config:
     dst: ~/.config/termite/config
     src: config/termite/config
@@ -37,6 +40,8 @@ profiles:
     - f_i3status_config
     - f_compton.conf
     - f_termite_config
+    - f_lock_screen.sh
+
   jureca:
     dotfiles:
     - f_bashrc
