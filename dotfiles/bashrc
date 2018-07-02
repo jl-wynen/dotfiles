@@ -367,7 +367,7 @@ function __prompt_command() {
 
     if [ "$SESSION_TYPE" = "remote/ssh" ]; then
         # show host name for remote sessions
-        PS1+=$IBLUE"\h: "
+        PS1+=$IBLUE"\h:"$COLOUR_OFF" "
     else
         # and battery status for local sessions
         PS1+=$(_prompt_battery)
