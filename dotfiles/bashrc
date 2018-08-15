@@ -37,6 +37,9 @@ export PARDISO_LIC_PATH=~/.pardiso
 # we want all the colours!
 export TERM=xterm-256color
 
+# set default browser
+export BROWSER=firefox
+
 # configure git
 if [ -f ~/bin/git-completion.bash ]; then
     source ~/bin/git-completion.bash
@@ -72,7 +75,7 @@ alias mv='mv -i'
 
 # manipulate directory stack
 alias +='pushd .'  # add current dir to stack
-alias ´='pushd'    # exchange top dirs on stack and move to other
+alias ?='pushd'    # exchange top dirs on stack and move to other
 alias -- -='popd'  # remove top dir and cd into it
 
 # miscellanious
