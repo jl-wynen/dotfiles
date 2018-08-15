@@ -6,6 +6,9 @@ config:
   keepdot: false
   longkey: false
 dotfiles:
+  f_aiphi-theme.el:
+    dst: ~/.emacs.d/themes/aiphi-theme.el
+    src: emacs.d/themes/aiphi-theme.el
   f_bashrc:
     dst: ~/.bashrc
     src: bashrc
@@ -15,15 +18,57 @@ dotfiles:
   f_config:
     dst: ~/.i3/config
     src: i3/config
+  f_emacs:
+    dst: ~/.emacs
+    src: emacs
+  f_form-mode.el:
+    dst: ~/.emacs.d/modes/form-mode.el
+    src: emacs.d/modes/form-mode.el
   f_gitconfig:
     dst: ~/.gitconfig
     src: gitconfig
   f_i3status_config:
     dst: ~/.config/i3status/config
     src: config/i3status/config
+  f_jl-builtin.el:
+    dst: ~/.emacs.d/config/jl-builtin.el
+    src: emacs.d/config/jl-builtin.el
+  f_jl-c-cpp.el:
+    dst: ~/.emacs.d/config/jl-c-cpp.el
+    src: emacs.d/config/jl-c-cpp.el
+  f_jl-custom-set-variables.el:
+    dst: ~/.emacs.d/custom-set/jl-custom-set-variables.el
+    src: emacs.d/custom-set/jl-custom-set-variables.el
+  f_jl-extra.el:
+    dst: ~/.emacs.d/config/jl-extra.el
+    src: emacs.d/config/jl-extra.el
+  f_jl-form.el:
+    dst: ~/.emacs.d/config/jl-form.el
+    src: emacs.d/config/jl-form.el
+  f_jl-functions.el:
+    dst: ~/.emacs.d/config/jl-functions.el
+    src: emacs.d/config/jl-functions.el
+  f_jl-keybindings.el:
+    dst: ~/.emacs.d/config/jl-keybindings.el
+    src: emacs.d/config/jl-keybindings.el
+  f_jl-latex-mode.el:
+    dst: ~/.emacs.d/config/jl-latex-mode.el
+    src: emacs.d/config/jl-latex-mode.el
+  f_jl-lisp-mode.el:
+    dst: ~/.emacs.d/config/jl-lisp-mode.el
+    src: emacs.d/config/jl-lisp-mode.el
+  f_jl-modeline.el:
+    dst: ~/.emacs.d/config/jl-modeline.el
+    src: emacs.d/config/jl-modeline.el
+  f_jl-prettify-symbols.el:
+    dst: ~/.emacs.d/config/jl-prettify-symbols.el
+    src: emacs.d/config/jl-prettify-symbols.el
   f_lock_screen.sh:
     dst: ~/bin/lock_screen.sh
     src: bin/lock_screen.sh
+  f_smart-mode-line-aiphi.el:
+    dst: ~/.emacs.d/themes/smart-mode-line-aiphi.el
+    src: emacs.d/themes/smart-mode-line-aiphi.el
   f_termite_config:
     dst: ~/.config/termite/config
     src: config/termite/config
@@ -41,7 +86,21 @@ profiles:
     - f_compton.conf
     - f_termite_config
     - f_lock_screen.sh
-
+    - f_emacs
+    - f_jl-builtin.el
+    - f_jl-c-cpp.el
+    - f_jl-extra.el
+    - f_jl-form.el
+    - f_jl-functions.el
+    - f_jl-keybindings.el
+    - f_jl-latex-mode.el
+    - f_jl-lisp-mode.el
+    - f_jl-modeline.el
+    - f_jl-prettify-symbols.el
+    - f_aiphi-theme.el
+    - f_smart-mode-line-aiphi.el
+    - f_form-mode.el
+    - f_jl-custom-set-variables.el
   jureca:
     dotfiles:
     - f_bashrc

@@ -1,0 +1,101 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Base Emacs configuration file
+;;;
+;;; Author: Jan-Lukas Wynen
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; set but don't use custom file to avoid clashes between settings
+(setq custom-file "~/.emacs.d/custom-set/auto-custom-set-variables.el")
+;; load the manually written one right at the start
+(load "~/.emacs.d/custom-set/jl-custom-set-variables.el")
+
+(setq load-home-init-file t)  ; don't load init file from ~/.xemacs/init.el
+
+;; do this early so we can debug all the rest
+(setq debug-on-error t)
+
+
+;;;-------------------------------------
+;;;          Load Packages
+;;;-------------------------------------
+(require 'cl)
+(require 'package)
+
+;; add extra archives
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (add-to-list 'package-archives
+             ;; '("marmalade" . "http://marmalade-repo.org/packages/") t)
+
+(package-initialize)
+
+
+(defvar jl/required-packages
+  '(
+    auctex
+    auto-complete
+    ebib
+    flycheck
+    latex-pretty-symbols
+    magit
+    magit-filenotify
+    tabbar
+    visible-mark
+    smart-mode-line
+    smooth-scrolling
+    sr-speedbar
+    ) "A list of packages to be installed at launch")
+
+(defun jl/required-packages-installed-p ()
+  "Check if all required packages are installed"
+  (loop for p in jl/required-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+
+;; if not all packages are installed, check one by one and install the missing ones.
+(unless (jl/required-packages-installed-p)
+  ;; check for new packages (package versions)
+  (message "%s" "Refreshing package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install missing packages
+  (dolist (p jl/required-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+
+;;;-------------------------------------
+;;;         Load custom files
+;;;-------------------------------------
+;; list all directories containing custom files
+(defconst jl/emacs-config-dir "~/.emacs.d/config")
+(defconst jl/emacs-themes-dir "~/.emacs.d/themes")
+(defconst jl/emacs-modes-dir "~/.emacs.d/modes")
+
+(defconst jl/emacs-dirs (list
+                         jl/emacs-config-dir
+                         jl/emacs-themes-dir
+                         jl/emacs-modes-dir))
+
+;; add above dirs to load path and byte compile
+(dolist (dir jl/emacs-dirs)
+  (byte-recompile-directory dir)
+  (add-to-list 'load-path dir))
+(add-to-list 'custom-theme-load-path jl/emacs-themes-dir)
+
+;; load all custom files
+(defun jl/load-directory (directory)
+  "Recursively load all `.el' files in directory."
+  (dolist (element (directory-files-and-attributes directory nil nil nil))
+    (let* ((path (car element))
+           (fullpath (concat directory "/" path))
+           (isdir (car (cdr element)))
+           (ignore-dir (or (string= path ".") (string= path ".."))))
+      (cond
+       ((and (eq isdir t) (not ignore-dir))
+        (load-directory fullpath))
+       ((and (eq isdir nil) (string= (substring path -3) ".el"))
+        (load (file-name-sans-extension fullpath)))))))
+(dolist (dir jl/emacs-dirs)
+  (jl/load-directory dir))
+
