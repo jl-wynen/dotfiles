@@ -12,12 +12,21 @@ dotfiles:
   f_bashrc:
     dst: ~/.bashrc
     src: bashrc
+  f_battery:
+    dst: ../.i3/blocks/battery
+    src: i3/blocks/battery
+  f_blocks.conf:
+    dst: ../.i3/blocks.conf
+    src: i3/blocks.conf
   f_compton.conf:
     dst: ~/.config/compton.conf
     src: config/compton.conf
   f_config:
     dst: ~/.i3/config
     src: i3/config
+  f_cpu:
+    dst: ../.i3/blocks/cpu
+    src: i3/blocks/cpu
   f_emacs:
     dst: ~/.emacs
     src: emacs
@@ -27,9 +36,6 @@ dotfiles:
   f_gitconfig:
     dst: ~/.gitconfig
     src: gitconfig
-  f_i3status_config:
-    dst: ~/.config/i3status/config
-    src: config/i3status/config
   f_jl-builtin.el:
     dst: ~/.emacs.d/config/jl-builtin.el
     src: emacs.d/config/jl-builtin.el
@@ -63,6 +69,9 @@ dotfiles:
   f_jl-prettify-symbols.el:
     dst: ~/.emacs.d/config/jl-prettify-symbols.el
     src: emacs.d/config/jl-prettify-symbols.el
+  f_kblayout:
+    dst: ../.i3/blocks/kblayout
+    src: i3/blocks/kblayout
   f_lock_screen.sh:
     dst: ~/bin/lock_screen.sh
     src: bin/lock_screen.sh
@@ -72,6 +81,9 @@ dotfiles:
   f_termite_config:
     dst: ~/.config/termite/config
     src: config/termite/config
+  f_wifi:
+    dst: ../.i3/blocks/wifi
+    src: i3/blocks/wifi
   f_xresources:
     dst: ~/.Xresources
     src: Xresources
@@ -82,7 +94,6 @@ profiles:
     - f_xresources
     - f_config
     - f_gitconfig
-    - f_i3status_config
     - f_compton.conf
     - f_termite_config
     - f_lock_screen.sh
@@ -101,6 +112,11 @@ profiles:
     - f_smart-mode-line-aiphi.el
     - f_form-mode.el
     - f_jl-custom-set-variables.el
+    - f_blocks.conf
+    - f_battery
+    - f_cpu
+    - f_kblayout
+    - f_wifi
   jureca:
     dotfiles:
     - f_bashrc

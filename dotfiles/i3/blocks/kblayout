@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Show the keyboard layout.
+
+layout=`setxkbmap -query | grep layout | awk '{print $2}'`
+
+echo $layout  # full text
+# echo $layout  # short text
+

@@ -343,12 +343,12 @@ set $background_color_light #888888
 # Start i3bar to display a workspace bar (plus the system information i3status if available)
 bar {
     i3bar_command i3bar
-    status_command i3status
+    status_command i3blocks -c $HOME/.i3/blocks.conf
     position bottom
 
 ## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
 #	tray_output primary
-#	tray_output eDP1
+    tray_output eDP1
 
     bindsym button4 nop
     bindsym button5 nop
@@ -370,7 +370,7 @@ bar {
 }
 
 # hide/unhide i3status bar
-bindsym $mod+m bar mode toggle
+bindsym $mod+Shift+m bar mode toggle
 
 # Theme colors
 # class                   border                  backgr.                 text          indic.  child_border
@@ -438,6 +438,17 @@ smart_borders on
 #         bindsym Return mode "default"
 #         bindsym Escape mode "default"
 # }
+
+# mode to change keyboard layout
+set $keyboard_layout Keyboard Layout: (e) US English, (d) Deutsch
+mode "$keyboard_layout" {
+     bindsym e exec --no-startup-id setxkbmap us ,mode "default"
+     bindsym d exec --no-startup-id setxkbmap de ,mode "default"
+
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+bindsym $mod+m mode "$keyboard_layout"
 
 # Launch udiskie to automount external drives
 exec --no-startup-id udiskie -ans &

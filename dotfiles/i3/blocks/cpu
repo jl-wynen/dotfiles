@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Show CPU usage.
+
+# the very last field is idle%
+idle=`mpstat 1 1 | tr '\n' ' ' | awk '{print $NF}' | awk -F. '{print $1}'`
+used=`expr 100 - $idle`
+
+# format the output
+output=`printf "%03d%%" "$used"`
+
+echo $output  # full text
+echo $output  # short text
+
+# red colour if high load
+if [ $used -gt 95 ]; then
+    echo '#CE3159'
+fi

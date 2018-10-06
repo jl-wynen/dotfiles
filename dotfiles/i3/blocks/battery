@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Show battery and power adaptor status.
+
+# get the current battery status
+batstring=$(acpi -b)
+if [[ $? != "0" ]]; then
+    echo "Battery: <Cannot execute acpi>"
+    echo "Battery: <Cannot execute acpi>"
+    echo "#006165"
+    exit 0
+fi
+
+# extract the current charge percent
+charge=$(echo $batstring | grep -oP 'Battery \d+: [^,]+, \K\d+')
+# extract the state (Carging, Discharging)
+state=$(echo $batstring | grep -oP 'Battery \d+: \K\w+')
+
+if [[ $state == "Unknown" ]]; then
+    # try to get the state from the adapter info
+    adapter=$(acpi -a | grep -oP 'Adapter \d+: \K[\w-]+')
+
+    if [[ $adapter == "on-line" ]]; then
+        state="Charging"
+    elif [[ $adapter == "off-line" ]]; then
+        state="Discharging"
+    else
+        echo "Battery: <Cannot parse output of acpi -a>"
+        echo "Battery: <Cannot parse output of acpi -a>"
+        echo "#006165"
+        exit 0
+    fi
+fi
+
+# print based on state
+if [[ $state == "Charging" ]]; then
+    echo "Charging $charge%"
+elif [[ $state == "Discharging" ]]; then
+    echo "Discharging $charge%"
+    echo "Discharging $charge%"
+    # red if low
+    if [[ $charge -gt 20 ]]; then
+        echo '#CE3159'
+    fi
+else
+    echo "Battery: <Unknown battery state: $state>"
+    echo "Battery: <Unknown battery state: $state>"
+    echo "#006165"
+fi
