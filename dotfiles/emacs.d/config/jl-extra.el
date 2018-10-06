@@ -83,6 +83,6 @@
 ;;;-------------------------------------
 ;;;         Visible-Mark
 ;;;-------------------------------------
-(setq visible-mark-max 1)  ; show only the most recent mark
-(setq visible-mark-faces `(visible-mark-face1))
-(global-visible-mark-mode t)
+;; (setq visible-mark-max 1)  ; show only the most recent mark
+;; (setq visible-mark-faces `(visible-mark-face1))
+;; (global-visible-mark-mode t)

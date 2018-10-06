@@ -12,7 +12,7 @@
 (setq load-home-init-file t)  ; don't load init file from ~/.xemacs/init.el
 
 ;; do this early so we can debug all the rest
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 
 ;;;-------------------------------------
@@ -34,16 +34,20 @@
   '(
     auctex
     auto-complete
+    cmake-mode
     ebib
     flycheck
+    flycheck-pycheckers
     latex-pretty-symbols
     magit
     magit-filenotify
-    tabbar
-    visible-mark
+    markdown-mode
     smart-mode-line
     smooth-scrolling
     sr-speedbar
+    tabbar
+    visible-mark
+    yaml-mode
     ) "A list of packages to be installed at launch")
 
 (defun jl/required-packages-installed-p ()

@@ -7,7 +7,7 @@
 (deftheme smart-mode-line-aiphi)
 
 (defface mode-line-adaptive-default
-  '((t :background "#0088AC"))
+  '((t :background "#cyan"))
   "Default face for adaptive mode line part."
   :group 'mode-line-faces)
 (defface mode-line-adaptive-overwrite
@@ -37,9 +37,9 @@
 
  '(sml/global ((t :foreground "black" :background nil :inverse-video nil)))
 
- '(mode-line-adaptive-default ((t :background "#0088AC" :foreground "white")))
- '(mode-line-adaptive-overwrite ((t :background "OrangeRed2" :foreground "white"  :inverse-video nil)))
- '(mode-line-adaptive-minibuffer-active ((t :background "ForestGreen" :foreground "white" :inverse-video nil)))
+ '(mode-line-adaptive-default ((t :background "#00549f" :foreground "white")))
+ '(mode-line-adaptive-overwrite ((t :background "OrangeRed2" :foreground "white" :inverse-video nil)))
+ '(mode-line-adaptive-minibuffer-active ((t :background "#497a2d" :foreground "white" :inverse-video nil)))
 
  '(mode-line-adaptive ((t :inherit mode-line-adaptive-default)))
  '(mode-line-static ((t :background nil)))

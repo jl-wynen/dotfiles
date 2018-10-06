@@ -88,7 +88,7 @@
  '(font-lock-regexp-grouping-backslash ((t nil)))
  '(font-lock-regexp-grouping-construct ((t nil)))
  '(font-lock-string-face ((t (:foreground "firebrick2"))))
- '(font-lock-type-face ((t (:bold 0 :foreground "PaleGreen3" :weight normal))))
+ '(font-lock-type-face ((t (:bold 0 :foreground "salmon" :weight normal))))
  '(font-lock-variable-name-face ((t (:inherit default))))
  '(font-lock-warning-face ((t (:bold t :foreground "dark orange" :weight bold))))
  '(font-lock-wildcard-face ((t (:foreground "CadetBlue" :weight normal))))

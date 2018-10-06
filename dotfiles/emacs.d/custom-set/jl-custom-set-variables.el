@@ -89,11 +89,11 @@
 
  '(custom-safe-themes
    (quote
-    ("04016dcce00636a653c2a1804184fc0ec3f186ca928177a80754e0025c844fdc" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "fb93a452671a5923798efd117a3799233f43fa19656fac0c5beee8151e7d1e5a" default)))
+    ("c93b8264434dcb5ae42c147c95e3717f45dd8fe33247d0a2f46d8300f71833fa" default)))
  )
 
 ;;; set default fonts
 (custom-set-faces
- '(default ((t (:family "Deja Vu Sans Mono" :slant normal :weight normal :height 160 :width normal))))
+ '(default ((t (:family "Deja Vu Sans Mono" :slant normal :weight normal :height 140 :width normal))))
  '(tabbar-default ((t (:inherit fixed-pitch :family "Deja Vu Sans Mono" :weight normal))))
  )

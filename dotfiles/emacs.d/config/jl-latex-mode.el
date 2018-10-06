@@ -35,6 +35,10 @@
                               (flyspell-mode 1)
                               (flyspell-buffer)
 
+                              ;; dont work
+                              ;; (define-key reftex-mode-map (kdb "` <right>") (lambda () (interactive) (insert "\\rightarrow")))
+                              ;; (define-key reftex-mode-map (kdb "` <left>") (lambda () (interactive) (insert "\\leftarrow")))
+
                               ;; switch # and \ (useful for German keyboards)
                               ;; (define-key reftex-mode-map (kbd "#") (lambda () (interactive) (insert "\\")))
                               ;; (define-key reftex-mode-map (kbd "\\") (lambda () (interactive) (insert "#")))
