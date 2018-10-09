@@ -39,7 +39,7 @@ elif [[ $state == "Discharging" ]]; then
     echo "Discharging $charge%"
     echo "Discharging $charge%"
     # red if low
-    if [[ $charge -gt 20 ]]; then
+    if [[ $charge -lt 20 ]]; then
         echo '#CE3159'
     fi
 else
