@@ -42,6 +42,8 @@ elif [[ $state == "Discharging" ]]; then
     if [[ $charge -lt 20 ]]; then
         echo '#CE3159'
     fi
+elif [[ $state == "Full" ]]; then
+    echo "Battery: Full"
 else
     echo "Battery: <Unknown battery state: $state>"
     echo "Battery: <Unknown battery state: $state>"
