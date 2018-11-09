@@ -210,6 +210,7 @@ for_window [class="Galculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="KeePass2"] floating enable
+for_window [class="kruler"] floating enable
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
 for_window [class="Lxappearance"] floating enable sticky enable border normal
 for_window [class="Manjaro-hello"] floating enable
@@ -374,9 +375,9 @@ bindsym $mod+Shift+m bar mode toggle
 
 # Theme colors
 # class                   border                  backgr.                 text          indic.  child_border
-  client.focused          $background_color_light $background_color_light #000000       #FDF6E3
-  client.focused_inactive $background_color_dark  $background_color_dark  $term_color12 #454948
-  client.unfocused        $background_color_dark  $background_color_dark  #F9FAF9       #454948
+  client.focused          $background_color_dark  $background_color_dark  $term_color12 #FDF6E3
+  client.focused_inactive $background_color_light $background_color_light #000000       #454948
+  client.unfocused        $background_color_light $background_color_light #F9FAF9       #454948
   client.urgent           $term_color9            $background_color_dark  $term_color9  #268BD2
   client.placeholder      #000000                 #0c0c0c                 #ffffff       #000000
 
@@ -387,8 +388,8 @@ bindsym $mod+Shift+m bar mode toggle
 #############################
 
 # Set inner/outer gaps
-gaps inner 10
-gaps outer -10
+gaps inner 5
+gaps outer -5
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
