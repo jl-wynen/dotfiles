@@ -86,17 +86,25 @@ alias grep='grep --color'
 alias callgrind='valgrind --tool=callgrind'
 alias pudb='pudb3'
 alias open="xdg-open 2>/dev/null"
+alias py="python"
 
 #######################################################
 #                  Setup Editors                      #
 # make emacs the default
-export EDITOR="emacsclient -t -a'vim'"
+# need a running emacsclient for these
+# export EDITOR="emacsclient -t -a'vim'"
+# export ALTERNATE_EDITOR="vim"
+# export VISUAL="emacsclient -c -a'emacs'"
+# export LESSEDIT="emacsclient -t -a'vim' ?lm+%lm. %f"
+# alias edit="emacsclient -t -a'vim'"
+# alias kill_emacs_f="emacsclient -e '(kill-emacs)' -a ''"
+# alias kill_emacs="emacsclient -e '(client-save-kill-emacs)' -a ''"
+
+export EDITOR="emacs -nw"
 export ALTERNATE_EDITOR="vim"
-export VISUAL="emacsclient -c -a'emacs'"
-export LESSEDIT="emacsclient -t -a'vim' ?lm+%lm. %f"
-alias edit="emacsclient -t -a'vim'"
-alias kill_emacs_f="emacsclient -e '(kill-emacs)' -a ''"
-alias kill_emacs="emacsclient -e '(client-save-kill-emacs)' -a ''"
+export VISUAL="emacs"
+export LESSEDIT="emacs ?lm+%lm. %f"
+alias edit="emacs -nw"
 
 # enable syntax highlighting for less (requires source-highlight)
 if [ -e /usr/bin/src-hilite-lesspipe.sh ]; then
@@ -377,7 +385,7 @@ function __prompt_command() {
     fi
 
     # PS1+=$(_prompt_subshells)
-    
+
     # show exit code of last program if non-zero
     if [ $EXIT_CODE -ne 0 ]; then
         PS1+=$IRED$EXIT_CODE$COLOUR_OFF" "
@@ -392,6 +400,9 @@ function __prompt_command() {
         PS1+=$RED
     fi
     PS1+="\$"$COLOUR_OFF" "
+    # PS1+="➤"$COLOUR_OFF" "
+    # PS1+="⚶"$COLOUR_OFF" "
+    # PS1+="⚘"$COLOUR_OFF" "
 }
 
 #######################################################
@@ -406,7 +417,7 @@ function power() {
         echo "File for battery not found."
         return 1
     fi
-        
+
     # can't use pre defined colour because \[ and \] are displayed by echo
     local POWER_SUPPLY=$(cat /sys/class/power_supply/BAT0/uevent | grep POWER_SUPPLY_CAPACITY= | cut -d'=' -f 2)
     if [ $(cat /sys/class/power_supply/AC/online) -eq 1 ]; then
@@ -461,7 +472,7 @@ function wtf() {
         fi
         return 0
     fi
-    
+
     case $EXIT_CODE in
         0)
             printf "Code %d: No error\n" $EXIT_CODE;;
