@@ -23,7 +23,7 @@ if [ -z "$SESSION_TYPE" ]; then
 fi
 
 # add locations to PATH
-export PATH=.:~/bin:~/.local/bin:$PATH
+export PATH=.:~/bin:~/.local/bin:~/.cargo/bin:$PATH
 
 # tell pkg-config about some packages
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig
@@ -33,6 +33,8 @@ export CUDADIR=/opt/cuda
 
 # path to pardiso.lic
 export PARDISO_LIC_PATH=~/.pardiso
+# do not show PARDISO license message
+export PARDISOLICMESSAGE=1
 
 # we want all the colours!
 export TERM=xterm-256color
@@ -55,6 +57,8 @@ fi
 
 # do not show pesky duplicates in history
 export HISTCONTROL=ignoredups
+# keep 2000 items in the history
+export HISTSIZE=2000
 
 #######################################################
 #                     Aliases                         #
@@ -85,7 +89,8 @@ alias ...='cd ..; cd ..'
 alias grep='grep --color'
 alias callgrind='valgrind --tool=callgrind'
 alias pudb='pudb3'
-alias open="xdg-open 2>/dev/null"
+# alias open="xdg-open 2>/dev/null"
+alias open="mimeopen >/dev/null 2>/dev/null"
 alias py="python"
 
 #######################################################
@@ -365,16 +370,16 @@ function __prompt_command() {
     local EXIT_CODE="$1"
     PS1=""
 
-    # show the time on the right hand side
-    # use \[ and \] to hide length of string from bash to get proper line break
-    # need to include explicit colour strings since otherwise masking
-    # with \[ and \] would not work properly
+    # # show the time on the right hand side
+    # # use \[ and \] to hide length of string from bash to get proper line break
+    # # need to include explicit colour strings since otherwise masking
+    # # with \[ and \] would not work properly
     # DATESTR=$(date +'%Y-%m-%d')
     # TIMESTR=$(date +'%H:%M:%S')
     # PS1+="\[\033["$(($(tput cols) - ${#DATESTR} - ${#TIMESTR} - 3))"C\
     # [\033[0;91m"$DATESTR"\033[0m|\033[0;91m"$TIMESTR"\033[0m]\r\]"
-    # PS1+="\[\033["$(($(tput cols) - ${#TIMESTR} - 2))"C\
-    # [\033[0;91m"$TIMESTR"\033[0m]\r\]"
+    # # PS1+="\[\033["$(($(tput cols) - ${#TIMESTR} - 2))"C\
+    # # [\033[0;91m"$TIMESTR"\033[0m]\r\]"
 
     if [ "$SESSION_TYPE" = "remote/ssh" ]; then
         # show host name for remote sessions
@@ -399,6 +404,7 @@ function __prompt_command() {
     else
         PS1+=$RED
     fi
+    # PS1+=""$COLOUR_OFF" "
     PS1+="\$"$COLOUR_OFF" "
     # PS1+="➤"$COLOUR_OFF" "
     # PS1+="⚶"$COLOUR_OFF" "
@@ -502,3 +508,19 @@ function copf() {
 function pasf() {
     printf "%s" $_CLIPBOARD
 }
+
+# # >>> conda initialize >>>
+# # !! Contents within this block are managed by 'conda init' !!
+# __conda_setup="$('/usr/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/usr/etc/profile.d/conda.sh" ]; then
+#         . "/usr/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/usr/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+# # <<< conda initialize <<<
+

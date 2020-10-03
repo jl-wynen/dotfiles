@@ -31,9 +31,6 @@ font xft:URWGothic-Book 11
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec termite
-
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -59,6 +56,9 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
 # bindsym XF86MonBrightnessDown exec "xbacklight -dec 10; notify-send 'brightness down'"
 
+# Audo control
+# bindsym XF86AudioMute exec "amixer -D pulse set Master 1+ toggle"
+
 # Start Applications
 bindsym $mod+Ctrl+b exec terminal -e 'bmenu'
 # bindsym $mod+F2 exec palemoon
@@ -76,6 +76,10 @@ bindsym $mod+Shift+d --release exec "killall dunst; exec notify-send 'restart du
 bindsym $mod+Ctrl+x --release exec --no-startup-id xkill
 bindsym $mod+a exec firefox
 bindsym $mod+t exec --no-startup-id terminal -e htop
+bindsym $mod+Return exec termite
+
+# toggle calculator window
+bindsym $mod+c [window_role="calculator"] scratchpad show; [window_role="calculator"] move position center
 
 # focus_follows_mouse no
 
@@ -247,7 +251,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # Lock screen
-bindsym Ctrl+Mod1+l exec --no-startup-id "$HOME/bin/lock_screen.sh"
+bindsym Ctrl+$mod+l exec --no-startup-id "$HOME/bin/lock_screen.sh"
 
 # Set shut down, restart and locking features
 bindsym Ctrl+Mod1+Delete mode "$mode_system"
@@ -305,6 +309,13 @@ exec --no-startup-id clipit
 exec --no-startup-id xautolock -time 10 -locker "$HOME/bin/lock_screen.sh"
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
+
+# start calculator
+for_window [window_role="calculator"] floating enable
+for_window [window_role="calculator"] resize set 1600 900
+for_window [window_role="calculator"] move scratchpad
+for_window [window_role="calculator"] border pixel 5
+exec --no-startup-id termite --role "calculator" -e "ipython --no-banner --pylab --quiet --pprint"
 
 # Color palette used for the terminal ( ~/.Xresources file )
 # Colors are gathered based on the documentation:
@@ -376,8 +387,8 @@ bindsym $mod+Shift+m bar mode toggle
 # Theme colors
 # class                   border                  backgr.                 text          indic.  child_border
   client.focused          $background_color_dark  $background_color_dark  $term_color12 #FDF6E3
-  client.focused_inactive $background_color_light $background_color_light #000000       #454948
-  client.unfocused        $background_color_light $background_color_light #F9FAF9       #454948
+  client.focused_inactive $background_color_dark $background_color_light #000000       #454948
+  client.unfocused        $background_color_dark $background_color_light #F9FAF9       #454948
   client.urgent           $term_color9            $background_color_dark  $term_color9  #268BD2
   client.placeholder      #000000                 #0c0c0c                 #ffffff       #000000
 
@@ -441,7 +452,7 @@ smart_borders on
 # }
 
 # mode to change keyboard layout
-set $keyboard_layout Keyboard Layout: (e) US English, (d) Deutsch
+set $keyboard_layout Keyboard Layout: (e) US English, (d) Deutsch, (g) Greek
 mode "$keyboard_layout" {
      bindsym e exec --no-startup-id setxkbmap us ,mode "default"
      bindsym d exec --no-startup-id setxkbmap de ,mode "default"

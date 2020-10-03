@@ -13,6 +13,7 @@
 (define-key jl/keys-minor-mode-map (kbd "C-d") 'jl/comment-dwim)
 (define-key jl/keys-minor-mode-map (kbd "C-x p") 'delete-window)
 (define-key jl/keys-minor-mode-map (kbd "M-g s") 'magit-status)
+(define-key jl/keys-minor-mode-map (kbd "C-x C-b") 'ibuffer)
 
 (define-key jl/keys-minor-mode-map [M-left] 'tabbar-backward-tab)
 (define-key jl/keys-minor-mode-map [M-right] 'tabbar-forward-tab)

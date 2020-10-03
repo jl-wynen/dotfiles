@@ -4,12 +4,14 @@
 	st = status -s -b
 	lg = log --pretty=format:\"%C(yellow)%h %C(cyan)%ad%Creset | [%an]%d%n%s%n\" --graph --date=short
 	diff = diff --ignore-space-change
-	difft = difftool -Y --ignore-space-change
-	merget = mergetool -Y
-	tracked = "!f() { git ls-files $1 --error-unmatch; }; f"
 [push]
 	default = current
 [user]
 	name = Jan-Lukas Wynen
 	email = j-l.wynen@hotmail.de
 	signingkey = AAE10E544CCD490F
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
