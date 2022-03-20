@@ -1,0 +1,120 @@
+## ----------------------------------------------
+## zsh Options
+
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored _correct _approximate
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' max-errors 6
+zstyle ':completion:*' original true
+zstyle ':completion:*' use-compctl false
+zstyle :compinstall filename '/home/jl/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=3000
+SAVEHIST=3000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+# do not show pesky duplicates in history
+setopt HIST_IGNORE_DUPS
+# Other HIST options set by config utility (see above)
+
+## ----------------------------------------------
+## Misc
+
+export PATH=.:~/bin:~/.local/bin:~/.cargo/bin:$PATH
+
+# we want all the colours!
+export TERM=xterm-256color
+
+# set default browser
+export BROWSER=firefox
+
+# Completions from https://github.com/zsh-users/zsh-completions
+fpath=(~/bin/zsh-completions/src $fpath)
+
+# configure gpg
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Configure editor
+export EDITOR="vim"
+export ALTERNATE_EDITOR="vim"
+export VISUAL="kate"
+alias edit="vim"
+# enable syntax highlighting for less (requires source-highlight)
+if [ -e /usr/bin/src-hilite-lesspipe.sh ]; then
+    export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+    export LESS=' -R '
+fi
+
+# Pager
+export PAGER="bat --paging=always"
+export BAT_PAGER=less
+
+# ripgrep
+export RIPGREP_CONFIG_PATH="/home/$USER/.config/ripgrep"
+
+## ----------------------------------------------
+## Aliases
+# use exa instead of ls
+alias ls='exa -F --color-scale'
+alias l='ls -lbgm --time-style=long-iso --git'
+alias ll='l'
+alias la='ls -a'
+alias lla='l -a'
+
+# safety prompts
+alias cp='cp -i'
+alias mv='mv -i'
+
+# manipulate directory stack
+# alias +='pushd .'  # add current dir to stack
+# alias ?='pushd'    # exchange top dirs on stack and move to other
+# alias -- -='popd'  # remove top dir and cd into it
+
+# replace programs
+alias cat='bat --paging=never'
+
+# miscellanious
+alias mkdir='mkdir -p'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias grep='grep --color'
+alias open="mimeopen >/dev/null 2>/dev/null"
+alias py="python"
+
+## ----------------------------------------------
+## exa theme
+# see https://the.exa.website/docs/colour-themes
+export EXA_COLORS="ur=37:uw=37:ux=37:ue=37:gr=36:gw=36:gx=36:ge=36:tr=35:tw=35:tx=35:te=35:uu=37:un=33:gu=37:gn=33:da=37"
+
+
+## ----------------------------------------------
+## Prompt
+eval "$(starship init zsh)"
+
+## ----------------------------------------------
+## Keybindings
+bindkey '^[[H' beginning-of-line                                # Home key
+bindkey '^[[F' end-of-line                                      # Home key
+bindkey '^[[C'  forward-char                                    # Right key
+bindkey '^[[D'  backward-char                                   # Left key
+bindkey '^[[1;5D' backward-word                                 # Ctrl+Left
+bindkey '^[[1;5C' forward-word                                  # Ctrl+Right
+
+bindkey '^[[5~' history-beginning-search-backward               # Page up key
+bindkey '^[[6~' history-beginning-search-forward                # Page down key
+
+bindkey '^[[2~' overwrite-mode                                  # Insert key
+bindkey '^[[3~' delete-char                                     # Delete key
+bindkey '^[[1;3D' undo                                          # Alt+Left

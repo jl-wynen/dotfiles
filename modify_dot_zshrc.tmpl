@@ -1,0 +1,25 @@
+#!/usr/bin/env sh
+
+#
+# Construct .zshrc from the dot_zshrc template
+# and preserve any code below a separator.
+# This handles, e.g., conda's setup code.
+#
+
+old_content=$(cat)
+
+# Output processed template.
+# The single quots around EOF are needed to treat the template verbatim.
+cat <<'EOF'
+{{ template "dot_zshrc" . }}
+EOF
+
+separator="## CHEZMOI DO NOT MODIFY BELOW THIS LINE"
+echo "## ----------------------------------------------"
+echo "$separator"
+
+# Extract unmanaged code after separator
+unmanaged="${old_content#*$separator}"
+
+# Strip leading newline, it is added by echo above.
+echo "${unmanaged:1}"
