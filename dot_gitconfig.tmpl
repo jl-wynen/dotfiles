@@ -1,0 +1,25 @@
+[alias]
+	co = checkout
+	ci = commit
+	st = status -s -b
+	lg = log --pretty=format:\"%C(yellow)%h %C(cyan)%ad%Creset | [%an]%d%n%s%n\" --graph --date=short
+	diff = diff --ignore-space-change
+[push]
+	default = current
+[user]
+	name = Jan-Lukas Wynen
+	email = {{ .email }}
+{{- if not (eq (len .git_key) 0) }}
+	signingkey = {{ .git_key }}
+{{- end }}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[commit]
+	gpgsign = {{ not (eq (len .git_key) 0) }}
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main

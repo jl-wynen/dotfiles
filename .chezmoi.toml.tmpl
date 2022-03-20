@@ -1,4 +1,20 @@
+{{- $email := "" -}}
+{{- if hasKey . "email" -}}
+{{-   $email = .email -}}
+{{- else -}}
+{{-   $email = promptString "email" -}}
+{{- end -}}
+
+{{- $git_key := "" -}}
+{{- if hasKey . "git_key" -}}
+{{-   $git_key = .git_key -}}
+{{- else -}}
+{{-   $git_key = promptString "Git signingkey (may be empty)" -}}
+{{- end -}}
+
 [data]
+    email = {{ $email | quote }}
+    git_key = {{ $git_key | quote }}
 
 [completion]
     custom = true
