@@ -36,7 +36,9 @@ export TERM=xterm-256color
 export BROWSER=firefox
 
 # Completions from https://github.com/zsh-users/zsh-completions
-fpath=(~/bin/zsh-completions/src $fpath)
+if [ -e ~/bin/zsh-completions/src ]; then
+  fpath=(~/bin/zsh-completions/src $fpath)
+fi
 
 # configure gpg
 unset SSH_AGENT_PID
@@ -58,20 +60,34 @@ if [ -e /usr/bin/src-hilite-lesspipe.sh ]; then
 fi
 
 # Pager
+{{ if lookPath "bat" -}}
 export PAGER="bat --paging=always"
 export BAT_PAGER=less
+{{- else -}}
+export PAGER="less"
+{{- end}}
 
+{{ if lookPath "rg" -}}
 # ripgrep
 export RIPGREP_CONFIG_PATH="/home/$USER/.config/ripgrep"
+{{- end }}
 
 ## ----------------------------------------------
 ## Aliases
+{{ if lookPath "exa" -}}
 # use exa instead of ls
 alias ls='exa -F --color-scale'
 alias l='ls -lbgm --time-style=long-iso --git'
 alias ll='l'
 alias la='ls -a'
 alias lla='l -a'
+{{- else -}}
+alias ls='\ls -hF --color=auto --time-style=long-iso'
+alias l='ls -l'
+alias ll='ls -l'
+alias la='ls -A'
+alias lla='ls -lA'
+{{- end }}
 
 # safety prompts
 alias cp='cp -i'
@@ -83,25 +99,30 @@ alias mv='mv -i'
 # alias -- -='popd'  # remove top dir and cd into it
 
 # replace programs
+{{ if lookPath "bat" -}}
 alias cat='bat --paging=never'
+{{- end}}
 
 # miscellanious
 alias mkdir='mkdir -p'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 alias grep='grep --color'
-alias open="mimeopen >/dev/null 2>/dev/null"
 alias py="python"
 
+{{ if lookPath "exa" -}}
 ## ----------------------------------------------
 ## exa theme
 # see https://the.exa.website/docs/colour-themes
 export EXA_COLORS="ur=37:uw=37:ux=37:ue=37:gr=36:gw=36:gx=36:ge=36:tr=35:tw=35:tx=35:te=35:uu=37:un=33:gu=37:gn=33:da=37"
-
+{{- end }}
 
 ## ----------------------------------------------
 ## Prompt
+{{ if lookPath "starship" -}}
 eval "$(starship init zsh)"
+{{- end }}
 
 ## ----------------------------------------------
 ## Keybindings

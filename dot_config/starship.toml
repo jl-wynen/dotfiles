@@ -1,0 +1,94 @@
+# Disable the blank line at the start of the prompt
+add_newline = false
+
+
+format = "$username$hostname$shlvl$battery$python$conda$jobs([{](cyan)$git_branch$git_commit$git_state$git_status[}](cyan) )$directory$sudo$character"
+right_format = "$status$cmd_duration$time"
+
+
+[[battery.display]]
+threshold=20
+style = "bold yellow"
+
+[character]
+success_symbol = "[❯](#c90a91)"
+error_symbol = "[❯](bold red)"
+
+[cmd_duration]
+min_time = 1_000
+format = "[$duration]($style) "
+style = "bright-black"
+
+[conda]
+# alternative: 
+format = "[$symbol](#95B350)[$environment](bold #95B350) "
+symbol = " "
+ignore_base = false
+
+[directory]
+truncation_length = 3
+truncation_symbol = "…/"
+truncate_to_repo = false
+style = "white"
+read_only = ""
+read_only_style = "yellow"
+repo_root_style = "blue"
+
+[git_branch]
+format = "[$branch]($style)"
+style = "cyan"
+
+[git_commit]
+format = "[\\($hash$tag\\)]($style)"
+style = "cyan"
+tag_disabled=false
+
+[git_status]
+format = '([$ahead_behind$all_status]($style))'
+conflicted = "*"
+up_to_date = "="
+style = "cyan"
+
+[hostname]
+format = "[@$hostname]($style) "
+style = "blue"
+
+[jobs]
+format = '[$symbol$number]($style) '
+style = "yellow"
+
+[python]
+format = '[$symbol](#95B350)[($virtualenv )](bold #95B350)'
+symbol = " "
+detect_extensions = []
+detect_files = []
+
+[shlvl]
+format = "[$symbol]($style) "
+style = "#a19b45"
+threshold = 2
+symbol = ""
+repeat = true
+disabled = false
+
+[status]
+format = '[$int $common_meaning(SIG$signal_name)]($style) '
+not_executable_symbol = "ne"
+disabled = false
+
+[sudo]
+format = "[$symbol]($style)"
+symbol = "sudo"
+style = "bg:red"
+disabled = false
+
+[time]
+format = "[$time]($style)"
+time_format = "%T"
+style = "bright-black"
+disabled = false
+
+[username]
+format = "[$user]($style)"
+style_root = "bg:blue"
+style_user = "blue"

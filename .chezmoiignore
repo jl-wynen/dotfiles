@@ -1,6 +1,18 @@
 README.md
 LICENSE
 
+{{- if not (lookPath "alacritty") }}
+.config/alacritty/alacritty.yml
+{{- end }}
+
 {{- if not (lookPath "bat") }}
 .config/bat/config
+{{- end }}
+
+{{- if not (lookPath "rg") }}
+.config/ripgrep
+{{- end }}
+
+{{- if not (lookPath "starship") }}
+.config/starship.toml
 {{- end }}
