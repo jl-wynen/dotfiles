@@ -1,0 +1,4 @@
+README.md
+{{- if not (lookPath "bat") }}
+.config/bat/config
+{{- end }}
