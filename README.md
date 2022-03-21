@@ -4,5 +4,5 @@ Uses [chezmoi](https://www.chezmoi.io/)
 
 ## New machine
 ```
-$ sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply jl-wynen
+sh -c "$(curl -fsLS chezmoi.io/get)" -- init --apply jl-wynen
 ```
