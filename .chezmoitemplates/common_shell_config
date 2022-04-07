@@ -38,6 +38,14 @@ export PAGER="less"
 export RIPGREP_CONFIG_PATH="/home/$USER/.config/ripgrep"
 {{- end }}
 
+# caches
+{{ if eq .chezmoi.hostname "jls-ess-workstation" -}}
+export SCIPPNEUTRON_DATA_DIR=/media/disk2/data/scippneutron
+export ESS_DATA_DIR=/media/disk2/data/ess/
+export ESS_AMOR_DATA_DIR=/media/disk2/data/ess_amor
+export MANTID_DATA_DIR=/media/disk2/data/mantid/test_data
+{{- end }}
+
 ## ----------------------------------------------
 ## Aliases
 {{ if lookPath "exa" -}}
