@@ -40,6 +40,7 @@ export RIPGREP_CONFIG_PATH="/home/$USER/.config/ripgrep"
 
 # caches
 {{ if eq .chezmoi.hostname "jls-ess-workstation" -}}
+export SCIPP_DATA_DIR=/media/disk2/data/scipp
 export SCIPPNEUTRON_DATA_DIR=/media/disk2/data/scippneutron
 export ESS_DATA_DIR=/media/disk2/data/ess/
 export ESS_AMOR_DATA_DIR=/media/disk2/data/ess_amor
