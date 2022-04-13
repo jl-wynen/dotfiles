@@ -57,7 +57,11 @@ alias ll='l'
 alias la='ls -a'
 alias lla='l -a'
 {{- else -}}
+{{ if ne .chezmoi.os "darwin" -}}
+alias ls='\ls -hF --color=auto'
+{{- else -}}
 alias ls='\ls -hF --color=auto --time-style=long-iso'
+{{- end -}}
 alias l='ls -l'
 alias ll='ls -l'
 alias la='ls -A'
