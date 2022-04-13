@@ -5,7 +5,7 @@
 
 zstyle ':completion:*' completer _complete _ignored _correct _approximate
 zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' max-errors 6
+zstyle ':completion:*' max-errors 2
 zstyle ':completion:*' original true
 zstyle ':completion:*' use-compctl false
 zstyle :compinstall filename '/home/jl/.zshrc'
