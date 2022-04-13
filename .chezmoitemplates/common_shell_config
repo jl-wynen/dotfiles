@@ -67,7 +67,7 @@ alias lla='l -a'
 alias ls='\ls -hF --color=auto'
 {{- else -}}
 alias ls='\ls -hF --color=auto --time-style=long-iso'
-{{- end -}}
+{{- end }}
 alias l='ls -l'
 alias ll='ls -l'
 alias la='ls -A'
