@@ -47,6 +47,12 @@ export ESS_AMOR_DATA_DIR=/media/disk2/data/ess_amor
 export MANTID_DATA_DIR=/media/disk2/data/mantid/test_data
 {{- end }}
 
+{{- if eq .chezmoi.hostname "macminim1-1" "macminim1-2" -}}
+# Proxies to get through DMSC firewall
+export http_proxy=192.168.1.1:8123
+export https_proxy=192.168.1.1:8123
+{{- end }}
+
 ## ----------------------------------------------
 ## Aliases
 {{ if lookPath "exa" -}}
