@@ -38,8 +38,8 @@ export PAGER="less"
 export RIPGREP_CONFIG_PATH="/home/$USER/.config/ripgrep"
 {{- end }}
 
-# caches
 {{ if eq .chezmoi.hostname "jls-ess-workstation" -}}
+# caches
 export SCIPP_DATA_DIR=/media/disk2/data/scipp
 export SCIPPNEUTRON_DATA_DIR=/media/disk2/data/scippneutron
 export ESS_DATA_DIR=/media/disk2/data/ess/
@@ -51,6 +51,8 @@ export MANTID_DATA_DIR=/media/disk2/data/mantid/test_data
 # Proxies to get through DMSC firewall
 export http_proxy=192.168.1.1:8123
 export https_proxy=192.168.1.1:8123
+export HTTP_PROXY=192.168.1.1:8123
+export HTTPS_PROXY=192.168.1.1:8123
 {{- end }}
 
 ## ----------------------------------------------
