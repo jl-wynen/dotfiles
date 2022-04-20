@@ -2,3 +2,4 @@ channels:
   - conda-forge
 auto_activate_base: false
 changeps1: false
+channel_priority: strict
