@@ -38,6 +38,13 @@ export PAGER="less"
 export RIPGREP_CONFIG_PATH="/home/$USER/.config/ripgrep"
 {{- end }}
 
+{{ if lookPath "mcfly" -}}
+# McFly search engine
+export MCFLY_FUZZY=2
+export MCFLY_RESULTS=20
+export MCFLY_INTERFACE_VIEW=BOTTOM
+{{- end }}
+
 {{ if eq .chezmoi.hostname "jls-ess-workstation" -}}
 # caches
 export SCIPP_DATA_DIR=/media/disk2/data/scipp

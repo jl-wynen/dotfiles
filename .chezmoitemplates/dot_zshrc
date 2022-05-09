@@ -26,6 +26,10 @@ bindkey -e
 setopt HIST_IGNORE_DUPS
 # Other HIST options set by config utility (see above)
 
+{{ if lookPath "mcfly" -}}
+eval "$(mcfly init zsh)"
+{{- end }}
+
 # Completions from https://github.com/zsh-users/zsh-completions
 if [ -e ~/bin/zsh-completions/src ]; then
   fpath=(~/bin/zsh-completions/src $fpath)

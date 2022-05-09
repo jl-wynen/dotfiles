@@ -28,6 +28,10 @@ fi
 
 {{ template "common_shell_config" . }}
 
+{{ if lookPath "mcfly" -}}
+eval "$(mcfly init bash)"
+{{- end }}
+
 ## ----------------------------------------------
 ## Aliases
 # manipulate directory stack
