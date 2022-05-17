@@ -68,6 +68,9 @@ export CCACHE_NOHASHDIR=1
 # ninja
 export NINJA_STATUS="[started:%s done:%f / %t] "
 
+# conda / mamba
+export MAMBA_NO_BANNER=1
+
 ## ----------------------------------------------
 ## Aliases
 {{ if lookPath "exa" -}}
