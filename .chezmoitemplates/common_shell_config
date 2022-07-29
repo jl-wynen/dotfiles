@@ -27,7 +27,7 @@ fi
 
 # Pager
 {{ if lookPath "bat" -}}
-export PAGER="bat --paging=always"
+export PAGER="bat --paging=always --wrap=never"
 export BAT_PAGER=less
 {{- else -}}
 export PAGER="less"
@@ -98,7 +98,7 @@ alias mv='mv -i'
 
 # replace programs
 {{ if lookPath "bat" -}}
-alias cat='bat --paging=never --plain'
+alias cat='bat --paging=never --plain --wrap=never'
 {{- end}}
 
 # miscellanious
