@@ -45,7 +45,7 @@ export MCFLY_RESULTS=20
 export MCFLY_INTERFACE_VIEW=BOTTOM
 {{- end }}
 
-{{ if eq .chezmoi.hostname "jls-ess-workstation" -}}
+{{ if eq .chezmoi.hostname "jls-ess-workstation" "jls-ess-workstation2" -}}
 # caches
 export SCIPP_DATA_DIR=/media/disk2/data/scipp
 export SCIPPNEUTRON_DATA_DIR=/media/disk2/data/scippneutron
