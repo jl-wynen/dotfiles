@@ -46,13 +46,19 @@ export MCFLY_INTERFACE_VIEW=BOTTOM
 {{- end }}
 
 {{ if eq .chezmoi.hostname "jls-ess-workstation" "jls-ess-workstation2" -}}
+{{ if eq .chezmoi.hostname "jls-ess-workstation" -}}
+DATA_BASE_DIR=/media/disk2/data
+{{- else -}}
+DATA_BASE_DIR=/mnt/disk2/data
+{{- end }}
 # caches
-export SCIPP_DATA_DIR=/media/disk2/data/scipp
-export SCIPPNEXUS_DATA_DIR=/media/disk2/data/scippnexus
-export SCIPPNEUTRON_DATA_DIR=/media/disk2/data/scippneutron
-export ESS_DATA_DIR=/media/disk2/data/ess/
-export ESS_AMOR_DATA_DIR=/media/disk2/data/ess_amor
-export MANTID_DATA_DIR=/media/disk2/data/mantid/test_data
+export SCIPP_DATA_DIR=$DATA_BASE_DIR/scipp
+export SCIPPNEXUS_DATA_DIR=$DATA_BASE_DIR/scippnexus
+export SCIPPNEUTRON_DATA_DIR=$DATA_BASE_DIR/scippneutron
+export ESS_DATA_DIR=$DATA_BASE_DIR/ess/
+export ESS_AMOR_DATA_DIR=$DATA_BASE_DIR/ess_amor
+export MANTID_DATA_DIR=$DATA_BASE_DIR/mantid/test_data
+unser DATA_BASE_DIR
 {{- end }}
 
 {{- if eq .chezmoi.hostname "macminim1-1" "macminim1-2" -}}
