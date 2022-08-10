@@ -15,16 +15,25 @@ compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=3000
-SAVEHIST=3000
+HISTSIZE=10000
+SAVEHIST=10000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
-{{ template "common_shell_config" . }}
+setopt extendedglob          # Extended globbing. Allows using regular expressions with *
+setopt nocaseglob            # Case insensitive globbing
+setopt numericglobsort       # Sort filenames numerically when it makes sense
+setopt nobeep                # No beep
+setopt histignorealldups     # If a new command is a duplicate, remove the older one
+setopt inc_append_history    # save commands are added to the history immediately, otherwise only when shell exits.
+setopt histignorespace       # Don't save commands that start with space
 
-# do not show pesky duplicates in history
-setopt HIST_IGNORE_DUPS
-# Other HIST options set by config utility (see above)
+zstyle ':completion:*' rehash true    # automatically find new executables in path
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+{{ template "common_shell_config" . }}
 
 {{ if lookPath "mcfly" -}}
 eval "$(mcfly init zsh)"
@@ -64,3 +73,15 @@ bindkey '^[[6~' history-beginning-search-forward                # Page down key
 bindkey '^[[2~' overwrite-mode                                  # Insert key
 bindkey '^[[3~' delete-char                                     # Delete key
 bindkey '^[[1;3D' undo                                          # Alt+Left
+
+## ----------------------------------------------
+## Syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# default highlighter
+typeset -A ZSH_HIGHLIGHT_STYLES
+ZSH_HIGHLIGHT_STYLES[alias]='fg=white,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=white,bold'
+ZSH_HIGHLIGHT_STYLES[command]='fg=white,bold'
+ZSH_HIGHLIGHT_STYLES[hashed_command]='fg=white,bold'
