@@ -25,13 +25,15 @@ setopt nocaseglob            # Case insensitive globbing
 setopt numericglobsort       # Sort filenames numerically when it makes sense
 setopt nobeep                # No beep
 setopt histignorealldups     # If a new command is a duplicate, remove the older one
-setopt inc_append_history    # save commands are added to the history immediately, otherwise only when shell exits.
+setopt inc_append_history    # save commands are added to the history immediately, otherwise only when shell exits
 setopt histignorespace       # Don't save commands that start with space
+setopt pushdignoredups       # Don’t push multiple copies of the same directory onto the directory stack
 
 zstyle ':completion:*' rehash true    # automatically find new executables in path
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' menu select
 
 {{ template "common_shell_config" . }}
 
@@ -61,7 +63,7 @@ eval "$(starship init zsh)"
 ## ----------------------------------------------
 ## Keybindings
 bindkey '^[[H' beginning-of-line                                # Home key
-bindkey '^[[F' end-of-line                                      # Home key
+bindkey '^[[F' end-of-line                                      # End key
 bindkey '^[[C'  forward-char                                    # Right key
 bindkey '^[[D'  backward-char                                   # Left key
 bindkey '^[[1;5D' backward-word                                 # Ctrl+Left
