@@ -115,6 +115,7 @@ alias ...='cd ../..'
 alias ....='cd ../../..'
 alias grep='grep --color'
 alias py="python"
+alias ipy="ipython"
 
 {{ if lookPath "exa" -}}
 ## ----------------------------------------------
