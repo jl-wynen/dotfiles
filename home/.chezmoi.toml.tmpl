@@ -12,12 +12,19 @@
 {{-   $git_key = promptString "Git signingkey (may be empty)" -}}
 {{- end -}}
 
-[data]
-    email = {{ $email | quote }}
-    git_key = {{ $git_key | quote }}
+{{- $manage_ssh_config := false -}}
+{{- if hasKey . "manage_ssh_config" -}}
+{{-   $manage_ssh_config = .manage_ssh_config -}}
+{{- else -}}
+{{-   $manage_ssh_config = promptBool "Should chezmoi manage ~/.ssh/config" -}}
+{{- end -}}
 
 [completion]
     custom = true
+
+[data]
+    email = {{ $email | quote }}
+    git_key = {{ $git_key | quote }}
 
 [diff]
 {{- if lookPath "delta" }}
@@ -28,3 +35,9 @@
     autoAdd = false
     autoCommit = false
     autoPush = false
+
+{{- if $manage_ssh_config }}
+encryption = "gpg"
+[gpg]
+    recipient = "E546CDA47D860F69FA309081748EB2577DCFCA0F"
+{{- end }}
