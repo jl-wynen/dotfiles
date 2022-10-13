@@ -1,18 +1,5 @@
-{{- $email := "" -}}
-{{- if hasKey . "email" -}}
-{{-   $email = .email -}}
-{{- else -}}
-{{-   $email = promptString "email" -}}
-{{- end -}}
-
-{{- $git_key := "" -}}
-{{- if hasKey . "git_key" -}}
-{{-   $git_key = .git_key -}}
-{{- else -}}
-{{-   $git_key = promptString "Git signingkey (may be empty)" -}}
-{{- end -}}
-
-
+{{- $email := promptStringOnce . "email" "Email" -}}
+{{- $git_key := promptStringOnce . "git_key" "Git signingkey (may be empty)" -}}
 {{- $manage_ssh_config := promptBoolOnce . "manage_ssh_config" "Does chezmoi manage ~/.ssh/config" -}}
 
 [completion]
