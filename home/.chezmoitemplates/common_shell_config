@@ -58,6 +58,7 @@ export SCIPPNEXUS_DATA_DIR=$DATA_BASE_DIR/scippnexus
 export SCIPPNEUTRON_DATA_DIR=$DATA_BASE_DIR/scippneutron
 export ESS_DATA_DIR=$DATA_BASE_DIR/ess/
 export ESS_AMOR_DATA_DIR=$DATA_BASE_DIR/ess_amor
+export PLOPP_DATA_DIR=$DATA_BASE_DIR/plopp
 export MANTID_DATA_DIR=$DATA_BASE_DIR/mantid/test_data
 unset DATA_BASE_DIR
 {{- end }}
