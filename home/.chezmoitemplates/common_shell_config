@@ -109,6 +109,9 @@ alias mv='mv -i'
 {{ if lookPath "bat" -}}
 alias cat='bat --paging=never --plain --wrap=never'
 {{- end}}
+{{ if lookPath "dust" -}}
+alias du=dust
+{{- end}}
 
 # miscellanious
 alias mkdir='mkdir -p'
