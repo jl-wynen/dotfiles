@@ -85,10 +85,10 @@ export MAMBA_NO_BANNER=1
 
 ## ----------------------------------------------
 ## Aliases
-{{ if lookPath "exa" -}}
-# use exa instead of ls
-alias ls='exa -F --color-scale'
-alias l='ls -lbgm --time-style=long-iso --git'
+{{ if lookPath "eza" -}}
+# use eza instead of ls
+alias ls='eza -F --hyperlink'
+alias l='ls -lbgm --time-style=long-iso --color-scale=all --git'
 alias ll='l'
 alias la='ls -a'
 alias lla='l -a'
@@ -125,9 +125,9 @@ alias grep='grep --color'
 alias py="python"
 alias ipy="ipython"
 
-{{ if lookPath "exa" -}}
+{{ if lookPath "eza" -}}
 ## ----------------------------------------------
-## exa theme
+## eza theme
 # see https://the.exa.website/docs/colour-themes
 export EXA_COLORS="ur=37:uw=37:ux=37:ue=37:gr=36:gw=36:gx=36:ge=36:tr=35:tw=35:tx=35:te=35:uu=37:un=33:gu=37:gn=33:da=37"
 {{- end }}
