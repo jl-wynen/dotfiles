@@ -74,8 +74,9 @@ export HTTP_PROXY=192.168.1.1:8123
 export HTTPS_PROXY=192.168.1.1:8123
 {{- end }}
 
-# ccache
+# Compiler caches
 export CCACHE_NOHASHDIR=1
+export RUSTC_WRAPPER=sccache
 
 # ninja
 export NINJA_STATUS="[started:%s done:%f / %t] "
