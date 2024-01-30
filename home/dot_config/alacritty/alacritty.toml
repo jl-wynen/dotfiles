@@ -1,0 +1,55 @@
+live_config_reload = false
+
+[colors.bright]
+black = "#7f8c8d"
+blue = "#2889e0"
+cyan = "#65d2d8"
+green = "#57ab27"
+magenta = "#c12aac"
+red = "#ce3159"
+white = "#ffffff"
+yellow = "#ffed00"
+
+[colors.dim]
+black = "#2e3439"
+blue = "#19609f"
+cyan = "#269ba1"
+green = "#527a3b"
+magenta = "#61305b"
+red = "#a12f4e"
+white = "#b4b4b4"
+yellow = "#c6bf58"
+
+[colors.normal]
+black = "#232423"
+blue = "#0065be"
+cyan = "#0098a1"
+green = "#497a2d"
+magenta = "#612158"
+red = "#b52048"
+white = "#e0e0e0"
+yellow = "#c6bd39"
+
+[colors.primary]
+background = "#0a0a0a"
+foreground = "#d2d2d2"
+
+[cursor]
+unfocused_hollow = true
+vi_mode_style = "Block"
+
+[cursor.style]
+blinking = "Off"
+shape = "Beam"
+
+[font]
+builtin_box_drawing = true
+size = 10.0
+
+[window]
+decorations = "none"
+opacity = 0.94
+
+[window.padding]
+x = 7
+y = 5
