@@ -1,11 +1,12 @@
 [alias]
-    b = switch -
+	b = switch -
 	co = checkout
 	ci = commit
+	diff = diff --ignore-space-change
+	fpush = push --force-with-lease
+	lg = log --pretty=format:\"%C(yellow)%h %C(cyan)%ad%Creset | [%an]%d%n%s%n\" --graph --date=short
 	s = switch
 	st = status -s -b
-	lg = log --pretty=format:\"%C(yellow)%h %C(cyan)%ad%Creset | [%an]%d%n%s%n\" --graph --date=short
-	diff = diff --ignore-space-change
 {{- if lookPath "delta" }}
 [core]
 	pager = delta
@@ -37,3 +38,5 @@
 	conflictstyle = diff3
 [diff]
 	colorMoved = default
+[rerere]
+	enabled = true
