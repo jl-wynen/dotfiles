@@ -1,4 +1,5 @@
 {{- $email := promptStringOnce . "email" "Email" -}}
+{{- $private_email := promptStringOnce . "provate_email" "Private Email" -}}
 {{- $git_key := promptStringOnce . "git_key" "Git signingkey (may be empty)" -}}
 {{- $manage_ssh_config := promptBoolOnce . "manage_ssh_config" "Does chezmoi manage ~/.ssh/config" -}}
 
@@ -7,6 +8,7 @@
 
 [data]
     email = {{ $email | quote }}
+    private_email = {{ $private_email | quote }}
     git_key = {{ $git_key | quote }}
     manage_ssh_config = {{ $manage_ssh_config }}
 

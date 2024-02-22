@@ -40,3 +40,9 @@
 	colorMoved = default
 [rerere]
 	enabled = true
+
+[includeIf "gitdir:~/Work"]
+	path = .gitconfig.work
+
+[includeIf "gitdir:~/Prog"]
+	path = .gitconfig.private
