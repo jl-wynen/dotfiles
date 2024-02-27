@@ -37,7 +37,9 @@ zstyle ':completion:*' menu select
 
 {{ template "common_shell_config" . }}
 
-{{ if lookPath "mcfly" -}}
+{{ if lookPath "atuin" -}}
+eval "$(atuin init zsh --disable-up-arrow)"
+{{ else if lookPath "mcfly" -}}
 eval "$(mcfly init zsh)"
 {{- end }}
 

@@ -28,7 +28,9 @@ fi
 
 {{ template "common_shell_config" . }}
 
-{{ if lookPath "mcfly" -}}
+{{ if lookPath "atuin" -}}
+eval "$(atuin init bash --disable-up-arrow)"
+{{ else if lookPath "mcfly" -}}
 eval "$(mcfly init bash)"
 {{- end }}
 

@@ -5,6 +5,10 @@ LICENSE
 .config/alacritty/alacritty.yml
 {{- end }}
 
+{{- if not (lookPath "atuin") }}
+.config/atuin/config.toml
+{{- end }}
+
 {{- if not (lookPath "bat") }}
 .config/bat/config
 {{- end }}
