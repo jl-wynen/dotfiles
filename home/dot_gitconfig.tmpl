@@ -1,48 +1,69 @@
 [alias]
-	b = switch -
-	co = checkout
-	ci = commit
-	diff = diff --ignore-space-change
-	fpush = push --force-with-lease
-	lg = log --pretty=format:\"%C(yellow)%h %C(cyan)%ad%Creset | [%an]%d%n%s%n\" --graph --date=short
-	s = switch
-	st = status -s -b
-{{- if lookPath "delta" }}
-[core]
-	pager = delta
-[interactive]
-	diffFilter = delta --color-only
-[delta]
-	navigate = true
-{{- end }}
-[push]
-	default = current
-[user]
-	name = Jan-Lukas Wynen
-	email = {{ .email }}
-{{- if not (eq (len .git_key) 0) }}
-	signingkey = {{ .git_key }}
-{{- end }}
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    b = switch -
+    co = checkout
+    ci = commit
+    diff = diff --ignore-space-change
+    fpush = push --force-with-lease
+    lg = log --pretty=format:\"%C(yellow)%h %C(cyan)%ad%Creset | [%an]%d%n%s%n\" --graph --date=short
+    s = switch
+    st = status -s -b
+[branch]
+    autoSetupRebase = always
 [commit]
-	gpgsign = {{ not (eq (len .git_key) 0) }}
-[pull]
-	rebase = true
-[init]
-	defaultBranch = main
-[merge]
-	conflictstyle = diff3
+    gpgsign = {{ not (eq (len .git_key) 0) }}
+[color]
+    ui = true
+[color "branch"]
+    current = yellow bold
+    local = yellow
+    remote = white dim
+[core]
+    editor = vim
+{{- if lookPath "delta" }}
+    pager = delta
+{{- end }}
+{{- if lookPath "delta" }}
+[delta]
+    navigate = true
+{{- end }}
 [diff]
-	colorMoved = default
+    colorMoved = default
+[fetch]
+    prune = true
+    pruneTags = true
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[init]
+    defaultBranch = main
+{{- if lookPath "delta" }}
+[interactive]
+    diffFilter = delta --color-only
+{{- end }}
+[merge]
+    conflictstyle = diff3
+[pull]
+    rebase = true
+[push]
+    autoSetupRemote = true
+    default = simple
+    followTags = true
 [rerere]
-	enabled = true
+    enabled = true
+[user]
+    name = Jan-Lukas Wynen
+    email = jan-lukas.wynen@ess.eu
+{{- if not (eq (len .git_key) 0) }}
+    signingkey = 748EB2577DCFCA0F
+{{- end }}
+    useConfigOnly = true
+[tag]
+    gpgSign = {{ not (eq (len .git_key) 0) }}
 
 [includeIf "gitdir:~/Work"]
-	path = .gitconfig.work
+    path = .gitconfig.work
 
 [includeIf "gitdir:~/Prog"]
-	path = .gitconfig.private
+    path = .gitconfig.private
