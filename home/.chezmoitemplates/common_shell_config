@@ -18,7 +18,7 @@ export GPG_TTY
 # Configure editor
 export EDITOR="vim"
 export ALTERNATE_EDITOR="vim"
-export VISUAL="kate"
+export VISUAL="kate -n -b"
 alias edit="vim"
 # enable syntax highlighting for less (requires source-highlight)
 if [ -e /usr/bin/src-hilite-lesspipe.sh ]; then
