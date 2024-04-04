@@ -48,6 +48,12 @@ if [ -e ~/bin/zsh-completions/src ]; then
   fpath=(~/bin/zsh-completions/src $fpath)
 fi
 
+# Set window title to working dir
+function set_win_title(){
+    echo -ne "\033]0; $(basename "$PWD") \007"
+}
+precmd_functions+=(set_win_title)
+
 ## ----------------------------------------------
 ## Aliases
 
