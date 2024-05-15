@@ -86,10 +86,10 @@ bindkey '^[[1;3D' undo                                          # Alt+Left
 
 ## ----------------------------------------------
 ## Syntax highlighting
-{{ if lookPath "/usr/share/zsh/plugins/zsh-syntax-highlighting" -}}
+{{ if lookPath "/usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" -}}
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-{{- else if lookPath "/usr/share/zsh-syntax-highlighting" -}}
+{{- else if lookPath "/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" -}}
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 {{- end }}
