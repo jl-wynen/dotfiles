@@ -19,6 +19,6 @@ These are nice to have and there is configuration for some of them here.
 - dust
 - eza
 - hyperfine
-- mcfly
+- mcfly *or* atuin
 - ripgrep
 - starship
