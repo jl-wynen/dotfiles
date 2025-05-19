@@ -95,7 +95,7 @@ export MAMBA_NO_BANNER=1
 ## Aliases
 {{ if lookPath "eza" -}}
 # use eza instead of ls
-alias ls='eza -F --hyperlink'
+alias ls='eza -F'
 alias l='ls -lbgm --time-style=long-iso --color-scale=all --git'
 alias ll='l'
 alias la='ls -a'
