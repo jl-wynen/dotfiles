@@ -2,7 +2,7 @@
 add_newline = false
 
 
-format = "$username$hostname$shlvl$battery$python$conda$jobs([{](cyan)$git_branch$git_commit$git_state$git_status[}](cyan) )$directory$sudo$character"
+format = "$username$hostname$shlvl$battery$python$conda$pixi$jobs([{](cyan)$git_branch$git_commit$git_state$git_status[}](cyan) )$directory$sudo$character"
 right_format = "$status$cmd_duration$time"
 
 
@@ -56,6 +56,9 @@ style = "blue"
 [jobs]
 format = '[$symbol$number]($style) '
 style = "yellow"
+
+[pixi]
+format = "[$environment](bold #95B350) "
 
 [python]
 format = '[$symbol](#95B350)[($virtualenv )](bold #95B350)'
