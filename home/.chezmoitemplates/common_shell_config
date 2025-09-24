@@ -33,6 +33,7 @@ fi
 {{ if lookPath "bat" -}}
 export PAGER="bat --paging=always --wrap=never"
 export BAT_PAGER=less
+alias man='man -P"bat -p"'
 {{- else -}}
 export PAGER="less"
 {{- end}}
