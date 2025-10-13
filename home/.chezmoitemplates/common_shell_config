@@ -50,30 +50,6 @@ export MCFLY_RESULTS=20
 export MCFLY_INTERFACE_VIEW=BOTTOM
 {{- end }}
 
-{{ if eq .chezmoi.hostname "jls-ess-workstation" "jls-ess-workstation2" -}}
-# caches
-{{ if eq .chezmoi.hostname "jls-ess-workstation" -}}
-DATA_BASE_DIR=/media/disk2/data
-{{- else -}}
-DATA_BASE_DIR=/mnt/disk2/data
-{{- end }}
-export SCIPP_DATA_DIR=$DATA_BASE_DIR/scipp
-export SCIPPNEXUS_DATA_DIR=$DATA_BASE_DIR/scippnexus
-export SCIPPNEUTRON_DATA_DIR=$DATA_BASE_DIR/scippneutron
-export ESS_DATA_DIR=$DATA_BASE_DIR/ess/
-export ESS_AMOR_DATA_DIR=$DATA_BASE_DIR/ess_amor
-export ESS_BIFROST_DATA_DIR=$DATA_BASE_DIR/ess_bifrost
-export ESS_DREAM_DATA_DIR=$DATA_BASE_DIR/ess_dream
-export ESS_LOKI_DATA_DIR=$DATA_BASE_DIR/ess_loki
-export ESS_ESTIA_DATA_DIR=$DATA_BASE_DIR/ess_estia
-export ESS_ODIN_DATA_DIR=$DATA_BASE_DIR/ess_odin
-export ESS_OFFSPEC_DATA_DIR=$DATA_BASE_DIR/ess_offspec
-export ESS_POWGEN_DATA_DIR=$DATA_BASE_DIR/ess_powgen
-export PLOPP_DATA_DIR=$DATA_BASE_DIR/plopp
-export MANTID_DATA_DIR=$DATA_BASE_DIR/mantid/test_data
-unset DATA_BASE_DIR
-{{- end }}
-
 {{- if eq .chezmoi.hostname "macminim1-1" "macminim1-2" -}}
 # Proxies to get through DMSC firewall
 export http_proxy=192.168.1.1:8123
