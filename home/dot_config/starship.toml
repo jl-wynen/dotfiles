@@ -61,7 +61,8 @@ style = "yellow"
 format = "[$environment](bold #95B350) "
 
 [python]
-format = '[$symbol](#95B350)[($virtualenv )](bold #95B350)'
+format = '[$symbol$version](#95B350)[( $virtualenv )](bold #95B350)'
+version_format = '$major.$minor'
 symbol = " "
 detect_extensions = []
 detect_files = []
